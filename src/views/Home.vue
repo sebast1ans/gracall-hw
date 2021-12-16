@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <v-container>
+        <v-row>
+            <v-col>
+                <CreatePost v-on:postCreated="forceRerender"/>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <ShowPosts :key="componentKey"/>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import ShowPosts from "@/components/ShowPosts";
+import CreatePost from "@/components/CreatePost";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    name: 'Home',
+
+    components: {
+        ShowPosts,
+        CreatePost
+    },
+
+    data: () => ({
+        componentKey: 0
+    }),
+
+    methods: {
+        forceRerender() {
+            this.componentKey += 1;
+        }
+    }
 }
 </script>
