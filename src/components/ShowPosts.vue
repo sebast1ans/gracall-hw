@@ -4,9 +4,8 @@
         <div class="post" v-for="post in postsReversed" :key="post.id">
             <h2>{{ post.title }}</h2>
             <p>{{ post.content }}</p>
-            <button>
-                <router-link :to="{name: 'EditPost', params: {id: post.id} }">Edit</router-link>
-            </button>
+            <router-link :to="{name: 'PostDetail', params: {id: post.id}}">Show Details</router-link>
+            <router-link :to="{name: 'EditPost', params: {id: post.id} }">Edit</router-link>
             <button @click="deletePost(post.id)">Delete Post</button>
         </div>
     </div>
@@ -15,9 +14,13 @@
 <script>
 
 import axios from 'axios'
+import PostDetail from "@/components/PostDetail";
 
 export default {
     name: "ShowPosts",
+    components: {
+        PostDetail
+    },
     data: () => ({
         posts: []
     }),
