@@ -12,25 +12,20 @@
                             <h2 class="mt-7 mb-5">New Post</h2>
                             <v-card elevation="8">
                                 <v-card-title>
-                                    <v-text-field
-                                            v-model="post.title"
-                                            label="Title"
-
-                                    >
+                                    <v-text-field v-model="post.title" label="Title">
                                     </v-text-field>
                                 </v-card-title>
                                 <v-card-text>
-                                    <v-textarea
-                                            v-model="post.content"
-                                            label="Content"
-                                    >
+                                    <v-textarea v-model="post.content" label="Content">
                                     </v-textarea>
                                 </v-card-text>
                                 <v-card-actions>
 
                                     <v-dialog v-model="dialogCreate" max-width="290">
                                         <template v-slot:activator="{on, attrs}">
-                                            <v-btn text color="success" v-bind="attrs" v-on="on">Save</v-btn>
+                                            <v-btn :disabled="post.title === '' || post.content === ''" text
+                                                   color="success" v-bind="attrs" v-on="on">Save
+                                            </v-btn>
                                         </template>
                                         <v-card>
                                             <v-card-title>Save New Post</v-card-title>
@@ -40,7 +35,9 @@
                                                 <v-btn text @click="dialogCreate = false">
                                                     Cancel
                                                 </v-btn>
-                                                <v-btn text color="success" @click="createPost()">Create post</v-btn>
+                                                <v-btn text color="success" @click="createPost(); dialogCreate = false">
+                                                    Create post
+                                                </v-btn>
                                             </v-card-actions>
                                         </v-card>
                                     </v-dialog>
@@ -84,6 +81,7 @@ import {dbBaseURL} from "@/dbBaseURL";
 
 export default {
     name: "CreatePost",
+
     data: () => ({
         dialogCreate: false,
         dialogCancel: false,
@@ -95,6 +93,7 @@ export default {
             content: ''
         }
     }),
+
     methods: {
         async createPost() {
             this.post.timestamp = Date.now()
@@ -108,10 +107,16 @@ export default {
         },
 
         cancel() {
-            this.post = {}
+            this.post = {
+                id: null,
+                timestamp: null,
+                title: '',
+                content: ''
+            }
             this.show = false
         }
-    }
+    },
+
 }
 </script>
 

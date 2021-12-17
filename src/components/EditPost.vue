@@ -14,7 +14,9 @@
                         <v-card-actions>
                             <v-dialog v-model="dialogSave" max-width="290">
                                 <template v-slot:activator="{on, attrs}">
-                                    <v-btn text color="green" v-bind="attrs" v-on="on">Save</v-btn>
+                                    <v-btn :disabled="post.title === '' || post.content === ''" text color="green"
+                                           v-bind="attrs" v-on="on">Save
+                                    </v-btn>
                                 </template>
                                 <v-card>
                                     <v-card-title>Save Post</v-card-title>
