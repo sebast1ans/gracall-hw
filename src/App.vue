@@ -6,7 +6,10 @@
                 <span>Admin</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn :to="{name: 'Home'}">Go Home</v-btn>
+            <v-btn :to="{name: 'Home'}">
+                <v-icon>mdi-home</v-icon>
+                Go Home
+            </v-btn>
         </v-app-bar>
         <v-main>
             <router-view/>
