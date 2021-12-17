@@ -8,7 +8,7 @@
                     <v-btn text color="warning" :to="{name: 'EditPost', params: {id: post.id} }">Edit Article</v-btn>
                 </h1>
                 <p>{{ formattedDate(post.timestamp) }}</p>
-                <p class="mt-12">{{ post.content }}</p>
+                <p style="white-space: pre-wrap;" class="mt-12">{{ post.content }}</p>
 
             </v-col>
         </v-row>
