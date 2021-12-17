@@ -1,25 +1,38 @@
 <template>
     <div id="show-posts">
-        <h1>Blog Posts</h1>
-        <div class="post" v-for="post in postsReversed" :key="post.id">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <router-link :to="{name: 'PostDetail', params: {id: post.id}}">Show Details</router-link>
-            <router-link :to="{name: 'EditPost', params: {id: post.id} }">Edit</router-link>
-            <button @click="deletePost(post.id)">Delete Post</button>
-        </div>
+        <v-container>
+            <v-row>
+                <v-col>
+                    <h1>Blog Posts</h1>
+                    <div class="post" v-for="post in postsReversed" :key="post.id">
+                        <v-card class="my-5">
+                            <v-card-title>{{ post.title }}</v-card-title>
+                            <v-card-text>{{ post.content }}</v-card-text>
+                            <v-card-actions>
+                                <v-btn text :to="{name: 'PostDetail', params: {id: post.id}}">Show Details</v-btn>
+                                <v-btn text color="warning" :to="{name: 'EditPost', params: {id: post.id} }">Edit
+                                </v-btn>
+                                <v-btn text color="error" @click="deletePost(post.id)">Delete Post</v-btn>
+                            </v-card-actions>
+                        </v-card>
+
+                    </div>
+                </v-col>
+            </v-row>
+        </v-container>
+
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import PostDetail from "@/components/PostDetail";
+import {dbBaseURL} from "@/dbBaseURL";
 
 export default {
     name: "ShowPosts",
     components: {
-        PostDetail
+
     },
     data: () => ({
         posts: []
@@ -34,7 +47,7 @@ export default {
     methods: {
         deletePost(id) {
             try {
-                axios.delete('http://localhost:3001/blog-posts/' + id)
+                axios.delete(dbBaseURL + id)
             } catch (e) {
                 console.error(e)
             }
@@ -45,7 +58,7 @@ export default {
 
     async created() {
         try {
-            const res = await axios.get('http://localhost:3001/blog-posts')
+            const res = await axios.get(dbBaseURL)
             this.posts = res.data
         } catch (e) {
             console.error(e)

@@ -1,16 +1,8 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col>
-                <CreatePost v-on:postCreated="forceRerender"/>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
-                <ShowPosts :key="componentKey"/>
-            </v-col>
-        </v-row>
-    </v-container>
+    <div>
+        <CreatePost v-on:postCreated="forceRerender"/>
+        <ShowPosts :key="componentKey"/>
+    </div>
 </template>
 
 <script>

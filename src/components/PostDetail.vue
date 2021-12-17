@@ -1,8 +1,11 @@
 <template>
 <div id="post-detail">
-    <router-link to='/'>Home</router-link>
-    <h1> {{ post.title }}</h1>
-    <p>{{ post.content }}</p>
+    <v-container>
+
+        <h1 class="my-3"> {{ post.title }}</h1>
+        <p class="mt-12">{{ post.content }}</p>
+        <v-btn :to="{name: 'EditPost', params: {id: post.id} }">Edit Article</v-btn>
+    </v-container>
 
 </div>
 </template>
@@ -10,6 +13,7 @@
 <script>
 
 import axios from 'axios'
+import {dbBaseURL} from "@/dbBaseURL";
 
 export default {
     name: "PostDetail",
@@ -19,7 +23,7 @@ export default {
 
     async created() {
         try {
-            const res = await axios.get('http://localhost:3001/blog-posts/' + this.$route.params.id)
+            const res = await axios.get(dbBaseURL + this.$route.params.id)
             this.post = res.data
         } catch (e) {
             console.error(e)
