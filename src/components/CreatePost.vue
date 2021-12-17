@@ -62,14 +62,12 @@
                                             </v-card-actions>
                                         </v-card>
                                     </v-dialog>
-
                                 </v-card-actions>
                             </v-card>
                         </div>
                     </v-expand-transition>
                 </v-col>
             </v-row>
-
         </v-container>
     </div>
 </template>

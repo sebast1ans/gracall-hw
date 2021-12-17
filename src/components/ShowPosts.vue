@@ -3,7 +3,6 @@
         <v-container>
             <v-row>
                 <v-col>
-
                     <h1>Blog Posts</h1>
                     <p v-if="posts.length === 0">There are no posts :(</p>
                     <div class="post" v-for="post in postsReversed" :key="post.id">
@@ -61,6 +60,5 @@ export default {
   .col {
     max-width: 700px;
   }
-
 }
 </style>
